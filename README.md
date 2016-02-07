@@ -1,17 +1,18 @@
 # This is the OpenImporter development repository.
 
-OpenImporter was inspired by SMF's forum converter engine and is supposed to "convert" data between different forum systems. This importer assumes you have already installed one of the supported destination systems and that your installation of this system is working properly. It copies data from a source system into the destination plattform, so it won't work without an installation of the selected destination. 
+OpenImporter was inspired by SMF's forum converter engine and attempts to "convert" data between different forum systems. The importer assumes you have installed one of the supported destination systems and that your installation of that system is working properly. It copies data from a source system into the destination plattform, so it won't work without an installation of the selected destination.
 
 ## Supported Source systems
 
-* MyBB [http://www.mybb.com/](http://www.mybb.com/)
-* phpBB3 [https://www.phpbb.com/](https://www.phpbb.com/)
-* SMF 1.1 [http://www.simplemachines.org/](http://www.simplemachines.org/)
-* SMF 2.0 [http://www.simplemachines.org/](http://www.simplemachines.org/)
-* vBulletin 4 [http://www.vbulletin.com/](http://www.vbulletin.com/)
-* Woltlab Burning Board [http://www.woltlab.com/](http://www.woltlab.com/)
-* Wordpress [https://wordpress.org/](https://wordpress.org/)
-* Wedge [wedge.org](wedge.org)
+* MyBB (1.6, 1.8)[http://www.mybb.com/](http://www.mybb.com/)
+* phpBB (3.x)[https://www.phpbb.com/](https://www.phpbb.com/)
+* SMF (1.1, 2.0, 2.1)[http://www.simplemachines.org/](http://www.simplemachines.org/)
+* UBB (7.5.x)[https://www.ubbcentral.com/](https://www.ubbcentral.com/)
+* vBulletin (4)[http://www.vbulletin.com/](http://www.vbulletin.com/)
+* Woltlab Burning Board (3.1)[http://www.woltlab.com/](http://www.woltlab.com/)
+* Wordpress(3.x)[https://wordpress.org/](https://wordpress.org/)
+* Wedge (1.0)[wedge.org](wedge.org)
+* Xenforo (1.1, 1.4)[https://xenforo.com/][https://xenforo.com/]
 
 ## Supported destination systems
 
@@ -38,9 +39,9 @@ In order to use the code from the master branch, download it and upload the file
 The code in the development branch relies on a number of external dependencies, that must be installed before using OpenImporter.
 External dependencies are handled by [Composer](https://getcomposer.org/), follow this procedure to have OpenImporter up and running:
 - Install Composer ([instructions](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx))
-- download OpenImporter package (either downloading the HEAD from github, or cloning the repository)
-- from the command line go to the OpenImporter directory
-- run the command ```composer install```
+- Download OpenImporter package (either downloading the HEAD from github, or cloning the repository)
+- From the command line go to the OpenImporter directory
+- Run the command ```composer install```
 - OpenImporter is ready to be used
 
 ## Notes
