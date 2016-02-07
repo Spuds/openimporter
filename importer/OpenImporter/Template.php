@@ -234,54 +234,54 @@ class Template
 		</script>
 		<style type="text/css">
 			body {
-				background-color: #cbd9e7;
 				margin: 0;
 				padding: 0;
+				background-color: #cbd9e7;
 			}
 			body, td {
 				color: #000;
 				font-size: small;
-				font-family: arial;
+				font-family: arial, serif;
 			}
 			a {
+				border-bottom: 1px dashed #789;
 				color: #2a4259;
 				text-decoration: none;
-				border-bottom: 1px dashed #789;
 			}
 			#header {
-				background-color: #809ab3;
 				padding: 22px 4% 12px 4%;
+				height: 40px;
+				border-bottom: 1px solid #fff;
+				background-color: #809ab3;
 				color: #fff;
 				text-shadow: 0 0 8px #333;
-				border-bottom: 1px solid #fff;
-				height: 40px;
 			}
 			#main {
-				padding: 20px 30px;
-				background-color: #fff;
-				border-radius: 5px;
 				margin: 7px;
+				padding: 20px 30px;
 				border: 1px solid #abadb3;
+				border-radius: 5px;
+				background-color: #fff;
 			}
 			#path_from, #path_to {
 				width: 480px;
 			}
 			.error_message, blockquote, .error {
+				padding: 1.5ex;
 				border: 1px dashed red;
 				border-radius: 5px;
 				background-color: #fee;
-				padding: 1.5ex;
 			}
 			.error_text {
 				color: red;
 			}
 			.content {
-				border-radius: 3px;
-				background-color: #eee;
-				color: #444;
 				margin: 1ex 0;
 				padding: 1.2ex;
 				border: 1px solid #abadb3;
+				border-radius: 3px;
+				background-color: #eee;
+				color: #444;
 			}
 			.button {
 				margin: 0 0.8em 0.8em 0.8em;
@@ -295,17 +295,17 @@ class Template
 				font-size: 2.5em;
 			}
 			h2 {
-				font-size: 1.5em;
 				color: #809ab3;
 				font-weight: bold;
+				font-size: 1.5em;
 			}
 			form {
 				margin: 0;
 			}
 			.textbox {
 				padding-top: 2px;
-				white-space: nowrap;
 				padding-right: 1ex;
+				white-space: nowrap;
 			}
 			.bp_invalid {
 				color:red;
@@ -319,12 +319,12 @@ class Template
 				font-size: smaller;
 			}
 			.valid_field {
-				background-color: #DEFEDD;
 				border: 1px solid green;
+				background-color: #DEFEDD;
 			}
 			.invalid_field {
-				background-color: #fee;;
-				border: 1px solid red;
+				border: 1px solid red;;
+				background-color: #fee;
 			}
 			#progressbar {
 				position: relative;
@@ -335,23 +335,23 @@ class Template
 				width: 300px;
 			}
 			#advanced_options {
-			 	-moz-columns: 2;
-  				-webkit-columns: 2;
-  				columns: 2;
-  				margin-left: 20%;
+				margin-left: 20%;
+				-webkit-columns: 2;
+				-moz-columns: 2;
+				columns: 2;
 			}
 			#advanced_options dt {
-  				-moz-page-break-after: avoid;
-				-webkit-column-break-after: avoid;
-				break-after: avoid;
-				width: 50%;
 				float: none;
+				width: 50%;
+				break-after: avoid;
+				-moz-page-break-after: avoid;
+				-webkit-column-break-after: avoid;
 			}
 			#advanced_options dd {
+				float: none;
+				break-before: avoid;
 				-moz-page-break-before: avoid;
 				-webkit-column-break-before: avoid;
-				break-before: avoid;
-				float: none;
 			}
 			dl {
 				clear: right;
@@ -360,65 +360,77 @@ class Template
 				padding: 0;
 			}
 			dt {
-				width: 20%;
 				float: left;
+				clear: both;
 				margin: 6px 5px 10px 0;
 				padding: 0;
-				clear: both;
+				width: 20%;
 			}
 			dd {
-				width: 78%;
 				float: right;
 				margin: 6px 0 3px 0;
 				padding: 0;
+				width: 78%;
 			}
 			#arrow_up {
 				display: none;
 			}
 			#toggle_button {
 				display: block;
-				color: #2a4259;
 				margin-bottom: 4px;
+				color: #2a4259;
 				cursor: pointer;
 			}
 			.arrow {
 				font-size: 8pt;
 			}
 			#destinations ul, #source {
-				padding: 0 1em;
+				padding: 0;
+				width: 90%;
+				margin: 0 auto;
 			}
 			#destinations ul li a {
-				display: block;
-				margin-bottom: 3px;
-				padding-bottom: 3px;
 				border-bottom: medium none;
-				line-height: 4em;
+				display: block;
+				height: 100%
 			}
-			#destinations ul li, #source li {
-				cursor: pointer;
-				float: left;
-				list-style: none;
-				padding: 0.5em;
+			#source li {
+				display: inline-block;
 				margin: 0 0.5em;
+				padding: 0.5em;
+				border: 1px solid #abadb3;
+				border-radius: 3px;
+				list-style: none;
+				cursor: pointer;
+			}
+			#destinations ul li span {
+				height: 4em;
+				max-height: 4em;
+				margin: 0 0.5em;
+				display: block;
+			}
+			#destinations ul li:before {
+				content: "";
+				display: inline-block;
+				vertical-align: middle;
+				height: 100%;
+			}
+			#destinations ul li {
+				display: inline-block;
+				vertical-align: middle;
+				margin-top: 1em;
+				width: 24%;
 				border: 1px solid #abadb3;
 				border-radius: 3px;
 			}
-			#destinations ul li {
-				width: 20%;
-				float: none;
-				display: inline-block;
-				height: 4em;
-				cursor: default;
-				vertical-align: middle;
-				margin-top: 1em;
-			}
-			#destinations ul li.active, #source li.active {
+			#destinations ul li.active, #source li.active,
+			#destinations ul li:hover, #destinations ul li a:hover {
 				background-color: #fff;
 			}
 			#destinations ul:after, #source:after {
-				content: "";
 				display: block;
 				clear: both;
+				content: "";
 			}
 		</style>
 	</head>
@@ -447,7 +459,9 @@ class Template
 		echo '
 			<h2>', $this->language->get('to_what'), '</h2>
 			<div class="content">
-				<p><label for="source">', $this->language->get('locate_source'), '</label></p>
+				<p>
+					<label for="source">', $this->language->get('locate_source'), '</label>
+				</p>
 				<ul id="source">';
 
 		// Who can we import into?
@@ -481,7 +495,7 @@ class Template
 				{
 					echo '
 					<li>
-						<a href="', $_SERVER['PHP_SELF'], '?import_script=', $script['path'], '">', $script['name'], '</a>
+						<span><a href="', $_SERVER['PHP_SELF'], '?import_script=', $script['path'], '">', $script['name'], '</a></span>
 					</li>';
 				}
 
