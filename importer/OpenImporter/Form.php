@@ -29,11 +29,24 @@ class Form
 	 */
 	public $action_url = '';
 
+	/**
+	 * Form constructor.
+	 *
+	 * @param $lng
+	 */
 	public function __construct($lng)
 	{
 		$this->lng = $lng;
 	}
 
+	/**
+	 * Set a key => value pair
+	 *
+	 * @param mixed $key
+	 * @param mixed $val
+	 *
+	 * @throws FormException
+	 */
 	public function __set($key, $val)
 	{
 		if ($key === 'options')
@@ -44,6 +57,13 @@ class Form
 		$this->data[$key] = $val;
 	}
 
+	/**
+	 * Fetch a value for a given key
+	 *
+	 * @param mixed $key
+	 *
+	 * @return null
+	 */
 	public function __get($key)
 	{
 		if (isset($this->data[$key]))
@@ -56,6 +76,11 @@ class Form
 		}
 	}
 
+	/**
+	 * Add an option to the form, like text input, or password input, etc
+	 *
+	 * @param array $field
+	 */
 	public function addOption($field)
 	{
 		switch ($field['type'])
@@ -105,25 +130,40 @@ class Form
 		}
 	}
 
+	/**
+	 * Split up form areas with a break
+	 */
 	public function addSeparator()
 	{
 		$this->data['options'][] = array();
 	}
 
+	/**
+	 * Add a new field to the form
+	 *
+	 * @param array|object $field
+	 */
 	public function addField($field)
 	{
 		if (is_object($field))
 		{
-			return $this->addField($this->makeFieldArray($field));
+			$this->addField($this->makeFieldArray($field));
 		}
 		else
 		{
 			$field['id'] = 'field' . $field['id'];
 
-			return $this->addOption($field);
+			$this->addOption($field);
 		}
 	}
 
+	/**
+	 * Convert a field object to an array
+	 *
+	 * @param object $field
+	 *
+	 * @return array
+	 */
 	public function makeFieldArray($field)
 	{
 		if ($field->attributes()->{'type'} == 'text')
