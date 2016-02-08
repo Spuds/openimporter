@@ -11,7 +11,7 @@ namespace OpenImporter;
 
 /**
  * Class Template
- * This is our UI
+ * This is our UI, it outputs information and status to the user
  *
  * @package OpenImporter
  */
@@ -116,7 +116,7 @@ class Template
 			// Header
 			$this->header(!$this->response->template_error);
 
-			// Body
+			// Any errors we need to make them aware of?
 			if ($this->response->template_error)
 			{
 				foreach ($this->response->getErrors() as $msg)
@@ -125,6 +125,7 @@ class Template
 				}
 			}
 
+			// Call the template
 			call_user_func_array(array($this, $this->response->use_template), $this->response->params_template);
 
 			// Footer
@@ -614,7 +615,7 @@ class Template
 	}
 
 	/**
-	 * Display information related to step2
+	 * Display information related to step2, its the recalculating statistics message
 	 */
 	public function step2()
 	{
@@ -636,7 +637,7 @@ class Template
 			</div>
 			<h2 style="margin-top: 2ex">', $this->language->get('complete'), '</h2>
 			<div class="content">
-			<p>', $this->language->get('congrats'), '</p>';
+				<p>', $this->language->get('congrats'), '</p>';
 
 		if ($writable)
 		{
@@ -680,7 +681,10 @@ class Template
 		</div>
 		<h2 style="margin-top: 2ex">', $this->language->get('not_done'), '</h2>
 		<div class="content">
-			<div style="margin-bottom: 15px; margin-top: 10px;"><span style="width: 250px; display: inline-block">', $this->language->get('overall_progress'), '</span><progress value="', $value, '" max="', $max, '"></progress></div>
+			<div style="margin-bottom: 15px; margin-top: 10px;">
+				<span style="width: 250px; display: inline-block">', $this->language->get('overall_progress'), '</span>
+				<progress value="', $value, '" max="', $max, '"></progress>
+			</div>
 			<p>', $this->language->get('importer_paused'), '</p>
 
 			<form action="', $_SERVER['PHP_SELF'], '?step=', $_GET['step'], isset($_GET['substep']) ? '&amp;substep=' . $_GET['substep'] : '', '&amp;start=', $_REQUEST['start'], '" method="post" name="autoSubmit">
@@ -717,7 +721,8 @@ class Template
 	}
 
 	/**
-	 * Function to generate a form from a set of form options
+	 * Function to generate a form from a set of options
+	 *
 	 * @param $form
 	 */
 	public function renderForm($form)
@@ -738,7 +743,9 @@ class Template
 				$toggle = true;
 				echo '
 					</dl>
-					<div id="toggle_button">', $this->language->get('advanced_options'), ' <span id="arrow_down" class="arrow">&#9660</span><span id="arrow_up" class="arrow">&#9650</span></div>
+					<div id="toggle_button">', $this->language->get('advanced_options'), '
+ 						<span id="arrow_down" class="arrow">&#9660</span><span id="arrow_up" class="arrow">&#9650</span>
+ 					</div>
 					<dl id="advanced_options" style="display: none; margin-top: 5px">';
 				continue;
 			}
