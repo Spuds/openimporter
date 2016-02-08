@@ -465,8 +465,9 @@ class Importer
 	}
 
 	/**
-	 * Looks at the importer and returns the steps that it's able to make.
-	 * @return int
+	 * Looks at the importer and returns the number steps that it's able to make.
+	 *
+	 * @return int[]
 	 */
 	protected function _find_steps()
 	{
@@ -484,6 +485,7 @@ class Importer
 				'checked' => (string) $xml_steps->attributes()->{'checked'} == 'false' ? '' : 'checked="checked"',
 			);
 		}
+
 		return $steps;
 	}
 
@@ -504,7 +506,7 @@ class Importer
 				$request = $this->db->query("
 					SELECT COUNT(*)
 					FROM $count", true);
-
+				$current = 0;
 				if (!empty($request))
 				{
 					list ($current) = $this->db->fetch_row($request);
@@ -515,8 +517,10 @@ class Importer
 
 				$import_steps[$counter_current_step]['counter'] = $current;
 			}
+
 			$counter_current_step++;
 		}
+
 		return array($progress_counter, $import_steps);
 	}
 
@@ -524,7 +528,7 @@ class Importer
 	 * The important one, transfer the content from the source forum to our
 	 * destination system.
 	 *
-	 * @param int $do_steps
+	 * @param array $do_steps
 	 * @return boolean
 	 */
 	public function doStep1($do_steps)
@@ -561,6 +565,7 @@ class Importer
 		$methods = get_class_methods($instance);
 		$substeps = array();
 		$substep = 0;
+		$key = '';
 		foreach ($methods as $method)
 		{
 			if (substr($method, 0, 7) !== 'substep')
@@ -585,10 +590,8 @@ class Importer
 	}
 
 	/**
-	 * we are done :)
+	 * We are done :)
 	 *
-	 * @global Database $db
-	 * @global type $boardurl
 	 * @return boolean
 	 */
 	public function doStep3()
