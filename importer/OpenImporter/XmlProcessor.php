@@ -85,7 +85,7 @@ class XmlProcessor
 	 * @param Database $db
 	 * @param Configurator $config
 	 * @param Template $template
-	 * @param $xml
+	 * @param object $xml
 	 */
 	public function __construct($db, $config, $template, $xml)
 	{
@@ -104,7 +104,7 @@ class XmlProcessor
 	 * Loop through each of the steps in the XML file
 	 *
 	 * @param int $step
-	 * @param array $substep
+	 * @param int $substep
 	 * @param array $do_steps
 	 */
 	public function processSteps($step, &$substep, &$do_steps)
@@ -180,6 +180,7 @@ class XmlProcessor
 			// Create some handy shortcuts
 			$no_add = $this->shoudNotAdd($this->current_step->options);
 
+			// Some tables may need special processing depending on the source/destination
 			$this->step1_importer->doSpecialTable($special_table);
 
 			while (true)
@@ -230,6 +231,13 @@ class XmlProcessor
 		}
 	}
 
+	/**
+	 * Escapes query's as needed
+	 *
+	 * @param string $current_data
+	 *
+	 * @return mixed
+	 */
 	protected function fixCurrentData($current_data)
 	{
 		if (strpos($current_data, '{$') !== false)
@@ -240,6 +248,11 @@ class XmlProcessor
 		return $current_data;
 	}
 
+	/**
+	 * Builds the insert statement for the destination and executes it
+	 *
+	 * @param string $special_table
+	 */
 	protected function insertRows($special_table)
 	{
 		// Nothing to insert?
@@ -265,6 +278,7 @@ class XmlProcessor
 			}
 		}
 
+		// Perform the insert
 		$this->db->query("
 			$insert_statement $special_table
 				(" . implode(', ', $this->keys) . ")
@@ -277,16 +291,19 @@ class XmlProcessor
 		// Take case of preparsecode
 		if ($special_code !== null)
 		{
+			// $row is used here to support scripts that have not implemented use $this->row
 			$row = $this->row;
 			eval($special_code);
 			$this->row = $row;
 		}
 
+		// Take care of any special destination table processing
 		$this->row = $this->step1_importer->doSpecialTable($special_table, $this->row);
 
 		// Fixing the charset, we need proper utf-8
 		$this->row = fix_charset($this->row);
 
+		// Take care of any text conversions as required by the destination, e.g. <br /> => <br>
 		$this->row = $this->step1_importer->fixTexts($this->row);
 	}
 
@@ -307,6 +324,11 @@ class XmlProcessor
 		}
 	}
 
+	/**
+	 * Update / increment the substep status for the UI
+	 *
+	 * @param int $substep
+	 */
 	protected function advanceSubstep($substep)
 	{
 		if ($_SESSION['import_steps'][$substep]['status'] == 0)
@@ -343,6 +365,13 @@ class XmlProcessor
 		return trim($string);
 	}
 
+	/**
+	 *
+	 * @param int $substep
+	 * @param array $do_steps
+	 *
+	 * @return bool
+	 */
 	protected function updateStatus(&$substep, &$do_steps)
 	{
 		$table_test = true;
@@ -381,7 +410,7 @@ class XmlProcessor
 	/**
 	 * Runs any presql commands or calls any presqlMethods
 	 *
-	 * @param array $substep
+	 * @param int $substep
 	 */
 	protected function doPresqlStep($substep)
 	{
