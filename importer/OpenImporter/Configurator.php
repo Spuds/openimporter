@@ -16,6 +16,8 @@ namespace OpenImporter;
  * Basically a generic getter/setter
  *
  * @property string lang_dir
+ * @property int step
+ * @property int start
  * @property string path_to
  * @property string path_from
  * @property string script
