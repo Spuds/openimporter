@@ -177,7 +177,7 @@ class Database
 	}
 
 	/**
-	 * wrapper for mysqli_fetch_row
+	 * Wrapper for mysqli_fetch_row
 	 *
 	 * @param \mysqli_result $result
 	 *
@@ -189,7 +189,7 @@ class Database
 	}
 
 	/**
-	 * wrapper for mysqli_num_rows
+	 * Wrapper for mysqli_num_rows
 	 *
 	 * @param \mysqli_result $result
 	 *
@@ -201,7 +201,7 @@ class Database
 	}
 
 	/**
-	 * wrapper for mysqli_insert_id
+	 * Wrapper for mysqli_insert_id
 	 *
 	 * @return integer
 	 */
@@ -236,7 +236,7 @@ class Database
 		}
 
 		// If we're here we know we don't have the index - so just add it.
-		if (!empty($index_info['type']) && $index_info['type'] == 'primary')
+		if (!empty($index_info['type']) && $index_info['type'] === 'primary')
 		{
 			$this->query('
 				ALTER TABLE ' . $table_name . '
@@ -364,7 +364,7 @@ class Database
 	/**
 	 * What is the index type?
 	 *
-	 * @param string[] $row
+	 * @param array$row
 	 *
 	 * @return string
 	 */
