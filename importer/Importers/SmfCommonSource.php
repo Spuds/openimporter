@@ -958,6 +958,8 @@ abstract class SmfCommonSourceStep2 extends Step2BaseImporter
 	/**
 	 * Assigns any board belonging to a category that doesn't exist
 	 * to a newly created category.
+	 *
+	 * @param array $cat_map
 	 */
 	protected function fixInexistentCategories($cat_map)
 	{

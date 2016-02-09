@@ -59,6 +59,8 @@ class Lang
 	/**
 	 * Loads the language xml file.
 	 *
+	 * @param string $path
+	 *
 	 * @return null
 	 * @throws \Exception if it cannot find the XML file.
 	 * @throws ImportException if the XML file has got a corrupted structure.
@@ -181,7 +183,7 @@ class Lang
 	/**
 	 * This is used to detect the Client's browser language.
 	 *
-	 * @return string the shortened string of the browser's language.
+	 * @return array the shortened string of the browser's language.
 	 */
 	protected function detect_browser_language()
 	{

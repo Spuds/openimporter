@@ -161,6 +161,7 @@ function addslashes_recursive($var)
  * Remove slashes recursively...
  *
  * @param array $var
+ * @param int $level
  *
  * @return array
  */

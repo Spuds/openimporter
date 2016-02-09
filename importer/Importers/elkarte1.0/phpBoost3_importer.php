@@ -41,6 +41,10 @@ class PHPBoost3 extends AbstractSourceImporter
 
 /**
  * Utility functions
+ *
+ * @param string $content
+ *
+ * @return string
  */
 function boost_replace_bbc($content)
 {
